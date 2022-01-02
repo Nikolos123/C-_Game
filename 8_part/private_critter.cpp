@@ -12,22 +12,44 @@ using namespace std;
 
 class Critter {
 public:
+    int GetHunger() const;
+
+    Critter(int hunger = 0);
+
+    void SetHunger(int hunger);
+
+private:
     int m_Hunger;
-    void Greet();
 };
-void Critter::Greet() {
-    cout<<"Hi, I'm a critter.My hunger level is " << m_Hunger << ".\n";
+
+Critter::Critter(int hunger) :
+        m_Hunger(hunger) {
+    cout << "A new critter has been born" << endl;
+}
+
+int Critter::GetHunger() const {
+    return m_Hunger;
+}
+
+
+void Critter::SetHunger(int hunger) {
+
+    if (hunger < 0) {
+        cout << "You can't set a critter's hunger to a negative number. \n\n";
+    } else {
+        m_Hunger = hunger;
+    }
 }
 
 int main() {
-    Critter crit1;
-    Critter crit2;
-    crit1.m_Hunger = 9;
-    cout<<"crit1's hunger level is " << crit1.m_Hunger<< ".\n";
-    crit2.m_Hunger = 3;
-    cout<<"crit2's hunger level is " << crit2.m_Hunger<< ".\n";
-    crit1.Greet();
-    crit2.Greet();
+    Critter crit(7);
+//    cout<<crit.m_Hunger; член функция является закрытой
+    cout << "Calling GetHunger():" << crit.GetHunger() << "\n\n";
+    cout << "Calling SetHunger(): with -1 \n";
+    crit.SetHunger(-1);
+    cout << "Calling SetHunger(): with 9 \n";
+    crit.SetHunger(9);
+    cout << "Calling GetHunger() : " << crit.GetHunger() << "\n\n";
     return 0;
 }
 
